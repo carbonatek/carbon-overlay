@@ -1,0 +1,18 @@
+--- a/cmake/scripts/FindVersion.cmake
++++ b/cmake/scripts/FindVersion.cmake
+@@ -139,12 +139,8 @@
+                         OUTPUT_STRIP_TRAILING_WHITESPACE
+                         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+         )
+-        if(NOT CURRENT_HASH STREQUAL SRCHASH)
+-            set(REV_MODIFIED 2)
+-            string(SUBSTRING "${CURRENT_HASH}" 0 8 SHORT_CURRENT_HASH)
+-            set(REV_VERSION "${REV_VERSION}-H${SHORT_CURRENT_HASH}")
+-            set(REV_MODIFIED 2)
+-        endif()
++       # Gentoo's build system modifies the source tree - causing the build to compile with an ugly hash, making it incompatible with MP games
++       set(REV_MODIFIED 0)
+     else()
+         set(REV_MODIFIED 1)
+     endif()
+
